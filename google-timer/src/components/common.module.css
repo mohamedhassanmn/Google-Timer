@@ -1,0 +1,23 @@
+span{
+    font-size: 13px;
+  }
+  .toMakeinline{
+    display:inline-block;
+    margin-top: -20px;
+    margin-bottom:5px;
+  }
+  .hide{
+    display:none;
+  }
+  .show{
+    display: block;
+  }
+  .borderBottom{
+    border-bottom:1px solid blue;
+  }
+  .borderNone{
+    border: none;
+  }
+  .pointer{
+    cursor: pointer;
+  }
