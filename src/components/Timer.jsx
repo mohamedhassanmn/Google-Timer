@@ -7,78 +7,58 @@ import PropTypes from "prop-types";
 
 import styles from "./common.module.css";
 
-const Verification = props =>
-  props.data ? (
-    <div>
-      <div
-        onClick={props.click}
-        onKeyPress="onKeyPressHandler"
-        role="button"
-        tabIndex="0"
-        className={styles.pointer}
-        style={{
-          paddingBottom: "5px",
-          textAlign: "right",
-          marginTop: "30px",
-          fontSize: "30px",
-          marginBottom: "30px",
-          width: "180px"
-        }}
-      >
-        {props.hr}
-        <span>h</span> {props.min}
-        <span>m</span> {props.sec}
-        <span>s</span>
-      </div>
+const Verification = props => (
+  <div>
+    <div
+      onClick={props.click}
+      onKeyPress={e => e}
+      role="button"
+      tabIndex="0"
+      className={styles.pointer}
+      style={{
+        paddingBottom: "5px",
+        textAlign: "right",
+        marginTop: "30px",
+        fontSize: "30px",
+        marginBottom: "30px",
+        width: "180px"
+      }}
+    >
+      {props.hr}
+      <span>h</span> {props.min}
+      <span>m</span> {props.sec}
+      <span>s</span>
+    </div>
+    {props.data ? (
       <Button
-        style={{
-          backgroundColor: "#4885ed",
-          height: "30px",
-          width: "60px",
-          color: "white"
-        }}
+        variant="contained"
+        color="primary"
+        style={{ width: "100px" }}
         onClick={props.stop}
       >
         Stop
       </Button>
-      <Button onClick={props.reset}>Reset</Button>
-    </div>
-  ) : (
-    <div>
-      <div
-        onClick={props.click}
-        onKeyPress="onKeyPressHandler"
-        role="button"
-        tabIndex="0"
-        className={styles.pointer}
-        style={{
-          paddingBottom: "5px",
-          textAlign: "right",
-          marginTop: "30px",
-          fontSize: "30px",
-          marginBottom: "30px",
-          width: "180px"
-        }}
-      >
-        {props.hr}
-        <span>h</span> {props.min}
-        <span>m</span> {props.sec}
-        <span>s</span>
-      </div>
+    ) : (
       <Button
-        style={{
-          backgroundColor: "#4885ed",
-          height: "30px",
-          width: "60px",
-          color: "white"
-        }}
+        variant="contained"
+        color="primary"
+        style={{ width: "100px" }}
         onClick={props.start}
       >
         Start
       </Button>
-      <Button onClick={props.reset}>Reset</Button>
-    </div>
-  );
+    )}
+    &nbsp;
+    <Button
+      variant="contained"
+      color="default"
+      style={{ width: "100px" }}
+      onClick={props.reset}
+    >
+      Reset
+    </Button>
+  </div>
+);
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -264,17 +244,22 @@ export default class Timer extends React.Component {
             />
             <br />
             <Button
-              style={{
-                backgroundColor: "#4885ed",
-                height: "30px",
-                width: "60px",
-                color: "white"
-              }}
+              variant="contained"
+              color="primary"
+              style={{ width: "100px" }}
               onClick={this.handleStart}
             >
               Start
             </Button>
-            <Button onClick={this.handleReset}>Reset</Button>
+            &nbsp;
+            <Button
+              variant="contained"
+              color="default"
+              style={{ width: "100px" }}
+              onClick={this.handleReset}
+            >
+              Reset
+            </Button>
           </div>
         ) : (
           <Verification
@@ -294,7 +279,7 @@ export default class Timer extends React.Component {
 }
 
 Verification.propTypes = {
-  data: PropTypes.string,
+  data: PropTypes.bool,
   click: PropTypes.func,
   hr: PropTypes.string,
   min: PropTypes.string,

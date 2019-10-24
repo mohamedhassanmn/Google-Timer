@@ -3,6 +3,7 @@ import React from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 import StopWatch from "./components/StopWatch";
 import Timer from "./components/Timer";
@@ -47,13 +48,13 @@ export default class App extends React.Component {
     } = this.state;
 
     return (
-      <>
+      <Grid container alignItems="center" style={{ height: "100vh" }}>
         <div
           className={stopwatchClass}
           style={{ border: "1px solid #ccc", margin: "0 450px" }}
         >
           <Paper>
-            <Tabs value={this.value} style={{ marginLeft: "20px" }}>
+            <Tabs style={{ marginLeft: "20px" }}>
               <Tab
                 label="Timer"
                 style={{ color: timerColor }}
@@ -93,7 +94,7 @@ export default class App extends React.Component {
             <Timer />
           </div>
         </div>
-      </>
+      </Grid>
     );
   }
 }

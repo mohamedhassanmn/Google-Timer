@@ -5,6 +5,7 @@ span {
   display: inline-block;
   margin-top: -20px;
   margin-bottom: 5px;
+  font-size:25px;
 }
 .hide {
   display: none;

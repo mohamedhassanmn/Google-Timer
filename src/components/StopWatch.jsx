@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import styles from "./common.module.css";
 
 class StopWatch extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       counter: 0,
       sec: 0,
@@ -71,56 +71,57 @@ class StopWatch extends React.Component {
   render() {
     return (
       <>
-        {this.state.timerSwitch ? (
-          <div>
-            <h2>
-              {this.state.hr}
-              <span>h</span> {this.state.min}
-              <span>m</span> {this.state.sec}
-              <span>s</span>
-            </h2>
-            <div className={styles.toMakeinline}>{this.state.counter}</div>
-            <div>
-              <Button
-                style={{
-                  backgroundColor: "#4885ed",
-                  height: "30px",
-                  width: "60px",
-                  color: "white"
-                }}
-                onClick={this.handleStopClick}
-              >
-                Stop
-              </Button>
-              <Button onClick={this.handleResetClick}>Reset</Button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            <h2>
-              {this.state.hr}
-              <span>h</span> {this.state.min}
-              <span>m</span> {this.state.sec}
-              <span>s</span>
-            </h2>
-            <div className={styles.toMakeinline}>{this.state.counter}</div>
-            <div>
-              <Button
-                style={{
-                  backgroundColor: "#4885ed",
-                  height: "30px",
-                  width: "60px",
-                  color: "white"
-                }}
-                onClick={this.handleClick}
-              >
-                Start
-              </Button>
-              &nbsp;
-              <Button onClick={this.handleResetClick}>Reset</Button>
-            </div>
-          </div>
-        )}
+        <div
+          style={{
+            paddingBottom: "5px",
+            marginTop: "30px",
+            fontSize: "30px",
+            marginBottom: "30px",
+            width: "180px"
+          }}
+        >
+          {this.state.hr}
+          <span>h</span> {this.state.min}
+          <span>m</span> {this.state.sec}
+          <span>s</span>
+        </div>
+        <div className={styles.toMakeinline}>{this.state.counter}</div>
+        <div>
+          {this.state.timerSwitch ? (
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                width: "100px"
+              }}
+              onClick={this.handleStopClick}
+            >
+              Stop
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                width: "100px"
+              }}
+              onClick={this.handleClick}
+            >
+              Start
+            </Button>
+          )}
+          &nbsp;
+          <Button
+            onClick={this.handleResetClick}
+            variant="contained"
+            color="default"
+            style={{
+              width: "100px"
+            }}
+          >
+            Reset
+          </Button>
+        </div>
       </>
     );
   }
