@@ -18,6 +18,10 @@ class StopWatch extends React.Component {
   }
 
   componentDidMount() {
+    this.internal();
+  }
+
+  internal = () => {
     setInterval(() => {
       if (this.state.counter < 99 && this.state.timerSwitch) {
         this.setState({
@@ -42,7 +46,7 @@ class StopWatch extends React.Component {
         });
       }
     }, 10);
-  }
+  };
 
   handleClick = () => {
     this.setState({
