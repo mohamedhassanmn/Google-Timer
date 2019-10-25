@@ -3,62 +3,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import PropTypes from "prop-types";
-
+import Verification from "./verification";
 import styles from "./common.module.css";
-
-const Verification = props => (
-  <div>
-    <div
-      onClick={props.click}
-      onKeyPress={e => e}
-      role="button"
-      tabIndex="0"
-      className={styles.pointer}
-      style={{
-        paddingBottom: "5px",
-        marginTop: "30px",
-        fontSize: "30px",
-        marginBottom: "30px",
-        width: "180px",
-        borderBottom: "1px solid #ccc"
-      }}
-    >
-      {props.hr}
-      <span>h</span> {props.min}
-      <span>m</span> {props.sec}
-      <span>s</span>
-    </div>
-    {props.data ? (
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ width: "100px" }}
-        onClick={props.stop}
-      >
-        Stop
-      </Button>
-    ) : (
-      <Button
-        variant="contained"
-        color="primary"
-        style={{ width: "100px" }}
-        onClick={props.start}
-      >
-        Start
-      </Button>
-    )}
-    &nbsp;
-    <Button
-      variant="contained"
-      color="default"
-      style={{ width: "100px" }}
-      onClick={props.reset}
-    >
-      Reset
-    </Button>
-  </div>
-);
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -197,34 +143,9 @@ export default class Timer extends React.Component {
   };
 
   handleChangeInput = e => {
-    const hrId = document.getElementById("hr");
-    const minId = document.getElementById("min");
-    const secId = document.getElementById("sec");
-    if (hrId.value.length < 2 && secId.value.length >= 2) {
-      if (minId.value.length >= 2 && hrId.value.length <= 2) {
-        const hrVal = [];
-        const val = minId.value.split("");
-        const secVal = secId.value.split("");
-        hrVal.push(val.shift());
-        val.push(secVal.shift());
-        secId.value = secVal.join("");
-        this.setState({
-          hr: this.state.hr + hrVal.join(""),
-          min: val.join("")
-        });
-      } else if (e.target.value.length > 2) {
-        const minVal = [];
-        const val = e.target.value.split("");
-        minVal.push(val.shift());
-        secId.value = val.join("");
-        this.setState({ min: this.state.min + minVal.join("") });
-      }
-    }
-    if (e.target.value.length <= 2) {
-      this.setState({
-        [e.target.id]: e.target.value
-      });
-    }
+    this.setState({
+      [e.target.id]: e.target.value
+    });
   };
 
   render() {
@@ -322,24 +243,3 @@ export default class Timer extends React.Component {
     );
   }
 }
-
-Verification.propTypes = {
-  data: PropTypes.bool,
-  click: PropTypes.func,
-  hr: PropTypes.number,
-  min: PropTypes.number,
-  sec: PropTypes.number,
-  stop: PropTypes.func,
-  start: PropTypes.func,
-  reset: PropTypes.func
-};
-Verification.defaultProps = {
-  data: "",
-  click: "",
-  hr: PropTypes.number,
-  min: PropTypes.string,
-  sec: PropTypes.number,
-  start: "",
-  stop: "",
-  reset: ""
-};
