@@ -105,7 +105,6 @@ export default class Timer extends React.Component {
           });
         }
         if (Number(this.state.sec) === 0) {
-          console.log("cool002");
           if (this.state.hr !== 0 && this.state.min === 0) {
             this.setState({
               sec: 59,
@@ -131,7 +130,6 @@ export default class Timer extends React.Component {
           });
         }
         if (Number(this.state.min) === 0) {
-          console.log("cool001");
           if (this.state.hr !== 0) {
             this.setState({
               min: 59,
@@ -199,29 +197,17 @@ export default class Timer extends React.Component {
   };
 
   handleChangeInput = e => {
-    const k = e.which;
-    console.log(k);
     const hrId = document.getElementById("hr");
     const minId = document.getElementById("min");
     const secId = document.getElementById("sec");
-    console.log(minId.value);
-    let num = 3;
-    if (hrId.value.length >= 2) {
-      num -= 1;
-    }
-    if (
-      hrId.value.length < 2 
-    ) {
-      console.log("super")
+    if (hrId.value.length < 2 && secId.value.length >= 2) {
       if (minId.value.length >= 2 && hrId.value.length <= 2) {
         const hrVal = [];
         const val = minId.value.split("");
         const secVal = secId.value.split("");
         hrVal.push(val.shift());
-        console.log(val, "min");
         val.push(secVal.shift());
         secId.value = secVal.join("");
-        // minId.value = val.join("");
         this.setState({
           hr: this.state.hr + hrVal.join(""),
           min: val.join("")
@@ -231,15 +217,7 @@ export default class Timer extends React.Component {
         const val = e.target.value.split("");
         minVal.push(val.shift());
         secId.value = val.join("");
-        console.log(minVal.join(""));
         this.setState({ min: this.state.min + minVal.join("") });
-        console.log("hello");
-
-        // if (e.target.id === "sec") {
-        //   min_id.focus();
-        // } else if (e.target.id === "min") {
-        //   hr_id.focus();
-        // }
       }
     }
     if (e.target.value.length <= 2) {
