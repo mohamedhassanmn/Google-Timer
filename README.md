@@ -1,5 +1,7 @@
 ## React Timer and Stopwatch
 
+If you'd like to contribute, help me close issues.
+
 ### Overview
 Minimal Yet Responsive Timer and Stopwatch Built With React & Material-UI 
 
