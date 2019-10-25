@@ -20,7 +20,8 @@ const Verification = props => (
         marginTop: "30px",
         fontSize: "30px",
         marginBottom: "30px",
-        width: "180px"
+        width: "180px",
+        borderBottom: "1px solid #ccc"
       }}
     >
       {props.hr}
@@ -69,13 +70,16 @@ export default class Timer extends React.Component {
       min: 5,
       sec: 0,
       hr: 0,
-      valueControl: "",
-      keyValue: "",
       verify: false
     };
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {
+    this.interval();
+  }
+
+  interval = () => {
     setInterval(() => {
       if (this.state.verify) {
         if (
@@ -101,7 +105,14 @@ export default class Timer extends React.Component {
           });
         }
         if (Number(this.state.sec) === 0) {
-          if (this.state.hr !== 0 || this.state.min !== 0) {
+          console.log("cool002");
+          if (this.state.hr !== 0 && this.state.min === 0) {
+            this.setState({
+              sec: 59,
+              min: 59,
+              hr: this.state.hr - 1
+            });
+          } else if (this.state.hr !== 0 || this.state.min !== 0) {
             this.setState({
               sec: 59,
               min: this.state.min - 1
@@ -120,6 +131,7 @@ export default class Timer extends React.Component {
           });
         }
         if (Number(this.state.min) === 0) {
+          console.log("cool001");
           if (this.state.hr !== 0) {
             this.setState({
               min: 59,
@@ -134,19 +146,27 @@ export default class Timer extends React.Component {
         }
       }
     }, 1000);
-  }
+  };
 
   handleStart = () => {
-    this.setState({
-      check: false,
-      verify: true,
-      min: Number(this.state.min),
-      sec: Number(this.state.sec),
-      hr: Number(this.state.hr),
-      verifySec: this.state.sec,
-      verifyMin: this.state.min,
-      verifyHr: this.state.hr
-    });
+    if (
+      isNaN(this.state.min) ||
+      isNaN(this.state.hr) ||
+      isNaN(this.state.sec)
+    ) {
+      alert("INVALID INPUT");
+    } else {
+      this.setState({
+        check: false,
+        verify: true,
+        min: Number(this.state.min),
+        sec: Number(this.state.sec),
+        hr: Number(this.state.hr),
+        verifySec: this.state.sec,
+        verifyMin: this.state.min,
+        verifyHr: this.state.hr
+      });
+    }
   };
 
   handleStop = () => {
@@ -164,62 +184,68 @@ export default class Timer extends React.Component {
       sec: this.state.verifySec,
       hr: this.state.verifyHr,
       verify: false,
-      valueControl: "",
-      keyValue: "",
       check: false
     });
-  };
-
-  handleKeypress = e => {
-    const k = e.which;
-    this.setState({ keyValue: k });
   };
 
   handleDivClick = () => {
     this.setState({
       check: true,
-      hr: this.state.hr,
-      min: this.state.min,
-      sec: this.state.sec
+      verify: false,
+      min: "",
+      sec: "",
+      hr: ""
     });
   };
 
   handleChangeInput = e => {
+    const k = e.which;
+    console.log(k);
+    const hrId = document.getElementById("hr");
+    const minId = document.getElementById("min");
+    const secId = document.getElementById("sec");
+    console.log(minId.value);
+    let num = 3;
+    if (hrId.value.length >= 2) {
+      num -= 1;
+    }
     if (
-      (this.state.keyValue >= 48 && this.state.keyValue <= 57) ||
-      this.state.keyValue === 8
+      hrId.value.length < 2 
     ) {
-      const input = e.target.value.slice(0, 6);
-      this.setState({ valueControl: input });
-      if (input.length === 1 || input.length === 2) {
-        this.setState({ sec: input, min: 0, hr: 0 });
-      } else if (input.length === 3) {
+      console.log("super")
+      if (minId.value.length >= 2 && hrId.value.length <= 2) {
+        const hrVal = [];
+        const val = minId.value.split("");
+        const secVal = secId.value.split("");
+        hrVal.push(val.shift());
+        console.log(val, "min");
+        val.push(secVal.shift());
+        secId.value = secVal.join("");
+        // minId.value = val.join("");
         this.setState({
-          sec: input.slice(1, input.length),
-          min: input.slice(0, 1),
-          hr: 0
+          hr: this.state.hr + hrVal.join(""),
+          min: val.join("")
         });
-      } else if (input.length === 4) {
-        this.setState({
-          sec: input.slice(2, input.length),
-          min: input.slice(0, 2),
-          hr: 0
-        });
-      } else if (input.length === 5) {
-        this.setState({
-          sec: input.slice(3, input.length),
-          min: input.slice(1, 3),
-          hr: input.slice(0, 1)
-        });
-      } else if (input.length === 6) {
-        this.setState({
-          sec: input.slice(4, input.length),
-          min: input.slice(2, 4),
-          hr: input.slice(0, 2)
-        });
-      } else if (input.length === 0) {
-        this.setState({ sec: 0 });
+      } else if (e.target.value.length > 2) {
+        const minVal = [];
+        const val = e.target.value.split("");
+        minVal.push(val.shift());
+        secId.value = val.join("");
+        console.log(minVal.join(""));
+        this.setState({ min: this.state.min + minVal.join("") });
+        console.log("hello");
+
+        // if (e.target.id === "sec") {
+        //   min_id.focus();
+        // } else if (e.target.id === "min") {
+        //   hr_id.focus();
+        // }
       }
+    }
+    if (e.target.value.length <= 2) {
+      this.setState({
+        [e.target.id]: e.target.value
+      });
     }
   };
 
@@ -229,14 +255,56 @@ export default class Timer extends React.Component {
         {this.state.check ? (
           <div>
             <TextField
+              id="hr"
+              ref={this.hr}
+              className={styles.text}
               autoFocus
-              value={this.state.valueControl}
-              placeholder="00h 00m 00s"
+              value={this.state.hr}
+              name="hr"
+              align="center"
+              label="hrs"
+              inputProps={{
+                maxLength: 2
+              }}
+              onKeyPress={this.handleKeypress}
+              onChange={this.handleChangeInput}
+              style={{
+                marginTop: "30px",
+                marginBottom: "30px"
+              }}
+            />
+            <TextField
+              className={styles.text}
+              id="min"
+              value={this.state.min}
+              autoFocus
+              label="min"
+              name="min"
+              align="center"
+              inputProps={{
+                maxLength: 2
+              }}
+              onKeyPress={this.handleKeypress}
+              onChange={this.handleChangeInput}
+              style={{
+                marginTop: "30px",
+                marginBottom: "30px"
+              }}
+            />
+            <TextField
+              className={styles.text}
+              autoFocus
+              value={this.state.sec}
+              id="sec"
+              name="sec"
+              label="sec"
+              inputProps={{
+                maxLength: 3
+              }}
               align="center"
               onKeyPress={this.handleKeypress}
               onChange={this.handleChangeInput}
               style={{
-                direction: "rtl",
                 marginTop: "30px",
                 marginBottom: "30px"
               }}
@@ -291,7 +359,7 @@ Verification.defaultProps = {
   data: "",
   click: "",
   hr: PropTypes.number,
-  min: PropTypes.number,
+  min: PropTypes.string,
   sec: PropTypes.number,
   start: "",
   stop: "",

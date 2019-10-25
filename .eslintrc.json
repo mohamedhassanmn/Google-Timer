@@ -27,6 +27,7 @@
     "no-console": "off",
     "no-alert": "off",
     "react/destructuring-assignment": 0,
-    "react/no-access-state-in-setstate": 0
+    "react/no-access-state-in-setstate": 0,
+    "no-restricted-globals": ["error", "event", "fdescribe"]
   }
 }
