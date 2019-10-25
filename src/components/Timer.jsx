@@ -198,7 +198,7 @@ export default class Timer extends React.Component {
               name="sec"
               label="sec"
               inputProps={{
-                maxLength: 3
+                maxLength: 2
               }}
               align="center"
               onKeyPress={this.handleKeypress}
