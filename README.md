@@ -1,5 +1,7 @@
 ## React Timer and Stopwatch
 
+If you'd like to contribute, help me close issues.
+
 ### Overview
 Minimal Yet Responsive Timer and Stopwatch Built With React & Material-UI 
 
@@ -12,12 +14,12 @@ Minimal Yet Responsive Timer and Stopwatch Built With React & Material-UI
 ### Instruction to run locally
 Using following commands try to run Stopwatch & Timer locally
 
-git clone https://github.com/mohamedhassanmn/react-timer-stopwatch
+`git clone https://github.com/mohamedhassanmn/react-timer-stopwatch`
 
-cd react-timer-stopwatch
+`cd react-timer-stopwatch`
 
-npm install
+`npm install`
 
-npm start
+`npm start`
 
 
