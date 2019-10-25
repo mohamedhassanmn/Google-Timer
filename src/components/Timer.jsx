@@ -17,7 +17,6 @@ const Verification = props => (
       className={styles.pointer}
       style={{
         paddingBottom: "5px",
-        textAlign: "right",
         marginTop: "30px",
         fontSize: "30px",
         marginBottom: "30px",
@@ -64,12 +63,12 @@ export default class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      verifySec: "00",
-      verifyMin: "00",
-      verifyHr: "00",
-      min: "05",
-      sec: "00",
-      hr: "00",
+      verifySec: 0,
+      verifyMin: 0,
+      verifyHr: 0,
+      min: 5,
+      sec: 0,
+      hr: 0,
       valueControl: "",
       keyValue: "",
       verify: false
@@ -281,9 +280,9 @@ export default class Timer extends React.Component {
 Verification.propTypes = {
   data: PropTypes.bool,
   click: PropTypes.func,
-  hr: PropTypes.string,
-  min: PropTypes.string,
-  sec: PropTypes.string,
+  hr: PropTypes.number,
+  min: PropTypes.number,
+  sec: PropTypes.number,
   stop: PropTypes.func,
   start: PropTypes.func,
   reset: PropTypes.func
@@ -291,9 +290,9 @@ Verification.propTypes = {
 Verification.defaultProps = {
   data: "",
   click: "",
-  hr: "",
-  min: "",
-  sec: "",
+  hr: PropTypes.number,
+  min: PropTypes.number,
+  sec: PropTypes.number,
   start: "",
   stop: "",
   reset: ""

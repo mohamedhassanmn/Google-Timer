@@ -54,7 +54,7 @@ export default class App extends React.Component {
           style={{ border: "1px solid #ccc", margin: "0 450px" }}
         >
           <Paper>
-            <Tabs style={{ marginLeft: "20px" }}>
+            <Tabs value={false} style={{ marginLeft: "20px" }}>
               <Tab
                 label="Timer"
                 style={{ color: timerColor }}
@@ -77,7 +77,7 @@ export default class App extends React.Component {
           style={{ border: "1px solid #ccc", margin: "0 450px" }}
         >
           <Paper>
-            <Tabs style={{ marginLeft: "20px" }}>
+            <Tabs value={false} style={{ marginLeft: "20px" }}>
               <Tab
                 label="Timer"
                 style={{ color: timerColor }}
