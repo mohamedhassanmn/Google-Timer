@@ -1,10 +1,9 @@
 import React from "react";
 
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 import Verification from "./verification";
-import styles from "./common.module.css";
+import Inputs from "./Inputs";
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -153,60 +152,26 @@ export default class Timer extends React.Component {
       <>
         {this.state.check ? (
           <div>
-            <TextField
-              id="hr"
-              ref={this.hr}
-              className={styles.text}
-              autoFocus
-              value={this.state.hr}
-              name="hr"
-              align="center"
-              label="hrs"
-              inputProps={{
-                maxLength: 2
-              }}
-              onKeyPress={this.handleKeypress}
-              onChange={this.handleChangeInput}
-              style={{
-                marginTop: "30px",
-                marginBottom: "30px"
-              }}
+            <Inputs
+              identification="hr"
+              val={this.state.hr}
+              lab="hr"
+              keyFunc={this.handleKeypress}
+              change={this.handleChangeInput}
             />
-            <TextField
-              className={styles.text}
-              id="min"
-              value={this.state.min}
-              autoFocus
-              label="min"
-              name="min"
-              align="center"
-              inputProps={{
-                maxLength: 2
-              }}
-              onKeyPress={this.handleKeypress}
-              onChange={this.handleChangeInput}
-              style={{
-                marginTop: "30px",
-                marginBottom: "30px"
-              }}
+            <Inputs
+              identification="min"
+              val={this.state.min}
+              lab="min"
+              keyFunc={this.handleKeypress}
+              change={this.handleChangeInput}
             />
-            <TextField
-              className={styles.text}
-              autoFocus
-              value={this.state.sec}
-              id="sec"
-              name="sec"
-              label="sec"
-              inputProps={{
-                maxLength: 2
-              }}
-              align="center"
-              onKeyPress={this.handleKeypress}
-              onChange={this.handleChangeInput}
-              style={{
-                marginTop: "30px",
-                marginBottom: "30px"
-              }}
+            <Inputs
+              identification="sec"
+              val={this.state.sec}
+              lab="sec"
+              keyFunc={this.handleKeypress}
+              change={this.handleChangeInput}
             />
             <br />
             <Button
