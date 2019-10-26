@@ -11,7 +11,7 @@ Minimal Yet Responsive Timer and Stopwatch Built With React & Material-UI
 * Input time, start, stop and reset timer
 * Start, stop and reset Stopwatch
 
-  #### Resulting image looks something like this:
+  #### Resulting image looks like this:
 
 [![2019-10-26-113345-1280x696-scrot.png](https://i.postimg.cc/fyqg5htg/2019-10-26-113345-1280x696-scrot.png)](https://postimg.cc/FkcZs8xj)
 
